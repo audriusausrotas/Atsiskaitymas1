@@ -3,6 +3,7 @@ const ingridient = document.querySelector(".ingridient");
 const desc = document.querySelector(".desc");
 const calories = document.querySelector(".calories");
 const error = document.querySelector(".error");
+const loading = document.querySelector(".loading");
 
 const image = document.querySelector(".image");
 const pTitle = document.querySelector(".p_title");
@@ -18,7 +19,7 @@ addIngridient.addEventListener("click", addHandler);
 getPhoto.addEventListener("click", getHandler);
 addRecipe.addEventListener("click", recipeHandler);
 
-const imgSrc = "https://static.thenounproject.com/png/559530-200.png";
+const imgSrc = "";
 
 let recipe = {
   key: "",
@@ -40,6 +41,8 @@ function addHandler() {
 }
 
 async function getHandler() {
+  loading.classList.add("hide");
+  image.classList.remove("hide");
   clearError();
   const response = await fetch(
     "https://www.themealdb.com/api/json/v1/1/random.php"
@@ -53,7 +56,7 @@ function recipeHandler() {
   if (recipe.ingridients.length < 3) {
     error.innerHTML = "Add at least 3 ingridients";
     return;
-  } else if (image.src === imgSrc) {
+  } else if (image.src === "") {
     error.innerHTML = "Add image first";
     return;
   }
@@ -85,13 +88,16 @@ function clearError() {
 function clear() {
   clearError();
 
+  loading.classList.remove("hide");
+  image.classList.add("hide");
+
   title.value = "";
   desc.value = "";
   calories.value = "";
   pTitle.innerHTML = "";
   pDesc.innerHTML = "";
   pCalories.innerHTML = "";
-  image.src = imgSrc;
+  image.src = "";
 
   recipe = {
     key: "",
