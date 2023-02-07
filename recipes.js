@@ -23,9 +23,13 @@ function displayRecipes(data) {
             <img src=${item.picture} alt="picture of food" />
           </div>
           <div class="recipes__title">${item.title}</div>
-          <div class="recipes__calories">${item.calories} Calories</div>
-          <div class="recipes__desc"> Description:<br/>${item.description}</div>
-          <div class="recipes__ingridiants">Ingridients: <br/>${item.ingridients.join(
+          <div class="recipes__calories">${
+            item.calories
+          } <strong>Calories</strong></div>
+          <div class="recipes__desc"><strong>Description</strong>:<br/>${
+            item.description
+          }</div>
+          <div class="recipes__ingridiants"><strong>Ingridients</strong>:<br/>${item.ingridients.join(
             ", "
           )}</div>
         </div>

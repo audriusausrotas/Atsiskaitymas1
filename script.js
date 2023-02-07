@@ -53,6 +53,7 @@ async function getHandler() {
 }
 
 function recipeHandler() {
+  console.log(recipe);
   if (recipe.ingridients.length < 3) {
     error.innerHTML = "Add at least 3 ingridients";
     return;
@@ -124,7 +125,15 @@ desc.onchange = (e) => {
 };
 
 calories.onchange = (e) => {
+  if (e.target.value < 0) {
+    calories.value = "";
+    error.innerHTML = "Calories can not be negative";
+  }
   clearError();
   recipe.calories = calories.value.trim();
   pCalories.innerHTML = e.target.value.trim() + " Calories";
+
+  if (e.target.value === "") {
+    pCalories.innerHTML = "";
+  }
 };
