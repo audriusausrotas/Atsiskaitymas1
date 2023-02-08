@@ -37,6 +37,7 @@ function addHandler() {
 
   pIngridients.innerHTML += `
     <li>${ingridient.value}</li>
+
     `;
 
   recipe.ingridients.push(ingridient.value.trim().toLowerCase());

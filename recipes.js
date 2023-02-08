@@ -39,7 +39,7 @@ function filterData() {
   let arr = recipes;
 
   title.value &&
-    (arr = recipes.filter(
+    (arr = arr.filter(
       (item) => title.value.toLowerCase() === item.title.toLowerCase()
     ));
 
