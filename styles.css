@@ -98,6 +98,7 @@ li {
   display: flex;
   gap: 5rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .recipe {

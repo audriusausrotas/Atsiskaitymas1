@@ -30,8 +30,8 @@ function displayRecipes(data) {
           <div class="recipes__ingridiants"><strong>Ingridients</strong>:<br/>${item.ingridients.join(
             ", "
           )}</div>
-        </div>
-    `;
+            </div>
+            `;
   });
 }
 
