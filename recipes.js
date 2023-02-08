@@ -1,9 +1,7 @@
 const title = document.querySelector(".filters__title");
 const calories = document.querySelector(".filters__calories");
 const ingridients = document.querySelector(".filters__ingridients");
-
 const items = document.querySelector(".items");
-
 const filter = document.querySelector(".filter");
 filter.addEventListener("click", filterData);
 
@@ -38,20 +36,22 @@ function displayRecipes(data) {
 }
 
 function filterData() {
-  let titleArr = recipes.filter((item) =>
-    title.value ? title.value.toLowerCase() === item.title.toLowerCase() : item
-  );
+  let arr = recipes;
 
-  let caloriesArr = titleArr.filter((item) =>
-    calories.value ? calories.value === item.calories : item
-  );
+  title.value &&
+    (arr = recipes.filter(
+      (item) => title.value.toLowerCase() === item.title.toLowerCase()
+    ));
 
-  let ingridientsArr = caloriesArr.filter((item) =>
-    ingridients.value
-      ? item.ingridients.includes(ingridients.value.toLowerCase())
-      : item
-  );
-  displayRecipes(ingridientsArr);
+  calories.value &&
+    (arr = arr.filter((item) => calories.value === item.calories));
+
+  ingridients.value &&
+    (arr = arr.filter((item) =>
+      item.ingridients.includes(ingridients.value.toLowerCase())
+    ));
+
+  displayRecipes(arr);
 }
 
 getRecipes();

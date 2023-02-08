@@ -32,33 +32,48 @@ let recipe = {
 
 function addHandler() {
   clearError();
+
   if (ingridient.value.trim() === "") return;
+
   pIngridients.innerHTML += `
     <li>${ingridient.value}</li>
     `;
+
   recipe.ingridients.push(ingridient.value.trim().toLowerCase());
+
   ingridient.value = "";
 }
 
 async function getHandler() {
   loading.classList.add("hide");
   image.classList.remove("hide");
+
   clearError();
+
   const response = await fetch(
     "https://www.themealdb.com/api/json/v1/1/random.php"
   );
+
   const data = await response.json();
   image.src = data.meals[0].strMealThumb;
   recipe.picture = data.meals[0].strMealThumb;
 }
 
 function recipeHandler() {
-  console.log(recipe);
   if (recipe.ingridients.length < 3) {
     error.innerHTML = "Add at least 3 ingridients";
     return;
-  } else if (image.src === "") {
-    error.innerHTML = "Add image first";
+  } else if (recipe.picture === "") {
+    error.innerHTML = "Add image ";
+    return;
+  } else if (recipe.title === "") {
+    error.innerHTML = "Add title";
+    return;
+  } else if (recipe.description === "") {
+    error.innerHTML = "Add description";
+    return;
+  } else if (recipe.calories === "") {
+    error.innerHTML = "Add calories";
     return;
   }
 
@@ -66,14 +81,11 @@ function recipeHandler() {
 
   let recipes = JSON.parse(window.localStorage.getItem("recipes"));
 
-  if (recipes) {
-    recipes.push(recipe);
-    window.localStorage.setItem("recipes", JSON.stringify(recipes));
-  } else {
-    recipes = [];
-    recipes.push(recipe);
-    window.localStorage.setItem("recipes", JSON.stringify(recipes));
-  }
+  !recipes && (recipes = []);
+
+  recipes.push(recipe);
+  window.localStorage.setItem("recipes", JSON.stringify(recipes));
+
   clear();
   error.innerHTML = "Recipe added";
 }
